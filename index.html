@@ -1,925 +1,754 @@
-Formulario 210 · HTML
-Copiar
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario 210 - DIAN</title>
+    <title>Formulario 210 DIAN - Réplica Exacta</title>
     <style>
-        /* ===========================================
-           CONFIGURACIÓN GENERAL PARA IMPRESIÓN A4
-           =========================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- CONFIGURACIÓN DE PÁGINA A4 --- */
         @page {
             size: A4;
-            margin: 10mm;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 7pt;
-            line-height: 1.1;
-            color: #000;
-            background: #fff;
-        }
-
-        /* ===========================================
-           CONTENEDOR PRINCIPAL
-           =========================================== */
-        .form-container {
-            width: 190mm;
-            margin: 0 auto;
-            background: white;
-        }
-
-        /* ===========================================
-           ENCABEZADO DEL FORMULARIO
-           =========================================== */
-        .header {
-            display: table;
-            width: 100%;
-            border: 1px solid #000;
-            margin-bottom: 2px;
-        }
-
-        .header-cell {
-            display: table-cell;
-            vertical-align: middle;
-            padding: 3px;
-            border-right: 1px solid #000;
-        }
-
-        .header-cell:last-child {
-            border-right: none;
-        }
-
-        .header-logo {
-            width: 15%;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18pt;
-            letter-spacing: 3px;
-        }
-
-        .header-title {
-            width: 60%;
-            text-align: center;
-            padding: 5px;
-        }
-
-        .header-title h1 {
-            font-size: 9pt;
-            font-weight: bold;
-            line-height: 1.2;
             margin: 0;
         }
-
-        .header-number {
-            width: 25%;
-            text-align: center;
-            background-color: #4472C4;
-            color: white;
-            font-size: 48pt;
-            font-weight: bold;
-            padding: 10px 0;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            font-family: 'Arial Narrow', Arial, sans-serif; /* Fuente condensada típica de formularios */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .page-a4 {
+            width: 210mm;
+            height: 297mm; /* Altura fija A4 */
+            background: white;
+            margin: 20px auto;
+            padding: 8mm 6mm; /* Márgenes ajustados visualmente */
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 8px; /* Tamaño base pequeño */
+            line-height: 1;
         }
 
-        /* ===========================================
-           TABLA PRINCIPAL DEL FORMULARIO
-           =========================================== */
+        /* --- ESTILOS DE TABLA --- */
         table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #000;
-            margin-bottom: 2px;
+            border-spacing: 0;
+            table-layout: fixed; /* Mantiene celdas rígidas */
         }
-
         td, th {
             border: 1px solid #000;
             padding: 1px 2px;
-            font-size: 6.5pt;
             vertical-align: middle;
+            overflow: hidden;
+            white-space: nowrap; /* Evita saltos de línea no deseados */
         }
+        
+        /* --- CLASES DE UTILIDAD --- */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-left { text-align: left; }
+        .bold { font-weight: bold; }
+        .tiny { font-size: 6px; }
+        .small { font-size: 7px; }
+        .normal { font-size: 8px; }
+        
+        /* --- COLORES Y DECORACIÓN --- */
+        .bg-blue-dian { background-color: #3b5998; color: white; } /* Azul cabecera */
+        .bg-grey { background-color: #cfd8dc; } /* Gris oscuro secciones */
+        .bg-light-blue { background-color: #e8eaf6; } /* Filas alternas azul muy claro */
+        
+        .border-none { border: none !important; }
+        .border-top-0 { border-top: none !important; }
+        .border-bottom-0 { border-bottom: none !important; }
+        .border-left-0 { border-left: none !important; }
+        .border-right-0 { border-right: none !important; }
 
-        /* ===========================================
-           SECCIÓN DE INFORMACIÓN BÁSICA
-           =========================================== */
-        .info-section {
-            background-color: #fff;
-        }
-
-        .year-box {
-            width: 40px;
-            height: 20px;
-            border: 1px solid #000;
-            display: inline-block;
-            margin-right: 2px;
-        }
-
-        .dian-space {
-            height: 180px;
-            background-color: #f5f5f5;
-            text-align: center;
-            vertical-align: top;
-            padding-top: 5px;
-        }
-
-        .form-number-space {
-            height: 180px;
-            vertical-align: top;
-            padding-top: 5px;
-        }
-
-        /* ===========================================
-           CAMPOS DE DATOS PERSONALES
-           =========================================== */
-        .personal-data-row td {
-            height: 22px;
-        }
-
-        .field-label {
-            font-size: 6pt;
-            font-weight: normal;
-        }
-
-        .field-number {
-            font-weight: bold;
-            font-size: 6.5pt;
-        }
-
-        /* ===========================================
-           SECCIÓN DE PATRIMONIO
-           =========================================== */
-        .patrimonio-header {
-            background-color: #D9E2F3;
-            font-weight: bold;
-            text-align: center;
-            padding: 3px;
-        }
-
-        .patrimonio-cell {
-            background-color: #E7E6E6;
-            font-weight: bold;
-        }
-
-        /* ===========================================
-           TABLA DE RENTAS - ENCABEZADOS
-           =========================================== */
-        .rentas-header {
-            background-color: #D9E2F3;
-            font-weight: bold;
-            text-align: center;
-            padding: 2px;
-            font-size: 6.5pt;
-        }
-
-        .rentas-subheader {
-            background-color: #E7E6E6;
-            font-weight: bold;
-            font-size: 6pt;
-            padding: 2px;
-        }
-
-        /* ===========================================
-           CELDAS DE DATOS - COLORES Y ESTILOS
-           =========================================== */
-        .bg-blue {
-            background-color: #D9E2F3;
-        }
-
-        .bg-gray {
-            background-color: #E7E6E6;
-        }
-
-        .bg-lightgray {
-            background-color: #F2F2F2;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        /* ===========================================
-           CELDAS NUMÉRICAS (PARA LLENAR CON PHP)
-           =========================================== */
-        .number-cell {
-            text-align: center;
-            font-weight: bold;
-            width: 25px;
-            background-color: #D9E2F3;
-        }
-
-        .input-cell {
-            background-color: #fff;
-            min-width: 60px;
-        }
-
-        /* ===========================================
-           SECCIÓN VERTICAL (CÉDULA GENERAL)
-           =========================================== */
-        .vertical-header {
-            writing-mode: vertical-lr;
+        /* --- TEXTO VERTICAL --- */
+        .vertical-text {
+            writing-mode: vertical-rl;
             transform: rotate(180deg);
-            font-weight: bold;
-            font-size: 6pt;
             text-align: center;
-            background-color: #E7E6E6;
-            padding: 3px 1px;
-        }
-
-        /* ===========================================
-           LIQUIDACIÓN PRIVADA
-           =========================================== */
-        .liquidacion-header {
-            background-color: #E7E6E6;
+            white-space: nowrap;
+            padding: 2px 0;
             font-weight: bold;
-            text-align: center;
-            font-size: 6.5pt;
+            font-size: 7px;
+            width: 12px;
         }
 
-        /* ===========================================
-           SECCIÓN DE FIRMAS
-           =========================================== */
-        .firma-section {
-            height: 60px;
-        }
-
-        .firma-box {
-            border: 1px solid #000;
-            width: 15px;
-            height: 15px;
-            display: inline-block;
-            margin-right: 5px;
-        }
-
-        /* ===========================================
-           CAMPO DE PAGO TOTAL
-           =========================================== */
-        .pago-total {
-            font-weight: bold;
-            font-size: 8pt;
-            border: 2px solid #000;
-            padding: 5px;
-            text-align: center;
-        }
-
-        /* ===========================================
-           AJUSTES PARA IMPRESIÓN
-           =========================================== */
-        @media print {
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            
-            .form-container {
-                width: 100%;
-            }
-            
-            table {
-                page-break-inside: avoid;
-            }
-        }
-
-        /* ===========================================
-           MARCA DE AGUA (NO DILIGENCIABLE)
-           =========================================== */
-        .watermark {
+        /* --- INPUTS Y CASILLAS --- */
+        .input-group {
             position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            min-height: 11px;
         }
-
-        .watermark::after {
-            content: 'NO DILIGENCIABLE';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 48pt;
-            color: rgba(200, 200, 200, 0.3);
+        /* Número de la casilla (ej: 32) */
+        .cell-num {
+            font-size: 7px;
             font-weight: bold;
-            z-index: 1;
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            z-index: 2;
             pointer-events: none;
         }
+        /* El campo de entrada invisible */
+        input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 9px;
+            text-align: right;
+            padding: 0 1px;
+            outline: none;
+            position: relative;
+            z-index: 1;
+        }
+        input[type="checkbox"] {
+            width: auto;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        /* Inputs de texto alineados a la izquierda */
+        .text-input input { text-align: left; text-transform: uppercase; }
 
-        /* ===========================================
-           CAMPOS PEQUEÑOS DE TEXTO
-           =========================================== */
-        .small-text {
-            font-size: 5.5pt;
+        /* --- HEADER ESPECÍFICO --- */
+        .header-logo { font-size: 26px; font-weight: bold; letter-spacing: 1px; color: #444; }
+        .form-id { 
+            font-size: 40px; 
+            font-weight: bold; 
+            background: #3b5998; 
+            color: white; 
+            border-radius: 0 0 0 15px; 
+            padding: 5px 10px;
+            float: right;
+            line-height: 1;
         }
 
-        .tiny-text {
-            font-size: 5pt;
+        @media print {
+            body { background: white; }
+            .page-a4 { margin: 0; box-shadow: none; page-break-after: avoid; }
         }
     </style>
 </head>
 <body>
-<div class="form-container">
 
-    <!-- =============================================
-         ENCABEZADO PRINCIPAL DEL FORMULARIO
-         ============================================= -->
-    <div class="header">
-        <div class="header-cell header-logo">
-            DIAN
-        </div>
-        <div class="header-cell header-title">
-            <h1>Declaración de renta y complementario<br>
-            personas naturales y asimiladas residentes<br>
-            y sucesiones ilíquidas de causantes residentes</h1>
-        </div>
-        <div class="header-cell header-number">
-            210
-        </div>
+<div class="page-a4">
+
+    <!-- ============================================= -->
+    <!-- 1. ENCABEZADO -->
+    <!-- ============================================= -->
+    <table>
+        <tr style="height: 50px;">
+            <td style="width: 20%; border-bottom: none;" class="text-center valign-middle">
+                <div class="header-logo">DIAN</div>
+            </td>
+            <td style="width: 60%; border-bottom: none;" class="text-center">
+                <div class="bold normal">Declaración de renta y complementario</div>
+                <div class="small">personas naturales y asimiladas residentes<br>y sucesiones ilíquidas de causantes residentes</div>
+            </td>
+            <td style="width: 20%; padding: 0; vertical-align: top; border-bottom:none;">
+                <div class="form-id">210</div>
+            </td>
+        </tr>
+        <tr>
+            <td class="border-top-0">
+                <div class="input-group">
+                    <span class="bold small" style="margin-right: 5px;">1. Año</span>
+                    <input type="text" name="anio" style="border: 1px solid #999; width: 40px; text-align: center;" value="20__">
+                </div>
+                <div class="tiny text-center" style="margin-top:2px;">Espacio reservado para la DIAN</div>
+            </td>
+            <td class="border-top-0" style="vertical-align: top;">
+                <div class="bold small">4. Número de formulario</div>
+            </td>
+            <td class="border-top-0"></td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 2. DATOS DEL DECLARANTE -->
+    <!-- ============================================= -->
+    <table class="border-top-0">
+        <tr>
+            <td rowspan="2" style="width: 2%;" class="vertical-text border-top-0">Datos del declarante</td>
+            <td colspan="2" style="width: 20%;">
+                <span class="tiny">5. Número de Identificación Tributaria (NIT)</span>
+                <div class="input-group text-input"><input type="text" name="nit"></div>
+            </td>
+            <td style="width: 4%;">
+                <span class="tiny">6. DV</span>
+                <div class="input-group"><input type="text" name="dv" class="text-center"></div>
+            </td>
+            <td style="width: 18%;">
+                <span class="tiny">7. Primer apellido</span>
+                <div class="input-group text-input"><input type="text" name="primer_apellido"></div>
+            </td>
+            <td style="width: 18%;">
+                <span class="tiny">8. Segundo apellido</span>
+                <div class="input-group text-input"><input type="text" name="segundo_apellido"></div>
+            </td>
+            <td style="width: 18%;">
+                <span class="tiny">9. Primer nombre</span>
+                <div class="input-group text-input"><input type="text" name="primer_nombre"></div>
+            </td>
+            <td style="width: 15%;">
+                <span class="tiny">10. Otros nombres</span>
+                <div class="input-group text-input"><input type="text" name="otros_nombres"></div>
+            </td>
+            <td style="width: 5%;">
+                <span class="tiny">12. Cód. Dir.</span>
+                <div class="input-group"><input type="text" name="cod_dir" class="text-center"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <span class="tiny">24. Actividad económica principal</span>
+                <div class="input-group text-input"><input type="text" name="actividad_economica"></div>
+            </td>
+            <td>
+                <span class="tiny">25. Cód.</span>
+                <div class="input-group"><input type="text" name="cod_correccion"></div>
+            </td>
+            <td colspan="2">
+                <span class="tiny">26. No. Formulario anterior</span>
+                <div class="input-group"><input type="text" name="form_anterior"></div>
+            </td>
+            <td colspan="2">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="tiny">27. Fracción año gravable siguiente</span>
+                    <input type="checkbox" name="fraccion_anio">
+                </div>
+            </td>
+            <td>
+                <span class="tiny">28. Uno por ciento (1%) compras</span>
+                <div class="input-group"><input type="text" name="casilla_28"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 3. PATRIMONIO -->
+    <!-- ============================================= -->
+    <table>
+        <tr>
+            <td class="bold small" style="width: 8%; background-color: #eee;">Patrimonio</td>
+            <td style="width: 25%;">
+                <div style="display:flex; align-items:center;">
+                    <span class="small" style="flex:1;">Total patrimonio bruto</span>
+                    <div style="width: 80px; border-left: 1px solid #000; position:relative;">
+                        <span class="cell-num">29</span>
+                        <input type="text" name="casilla_29">
+                    </div>
+                </div>
+            </td>
+            <td style="width: 33%;">
+                <div style="display:flex; align-items:center;">
+                    <span class="small" style="flex:1; text-align:right; padding-right:5px;">Deudas</span>
+                    <div style="width: 80px; border-left: 1px solid #000; position:relative;">
+                        <span class="cell-num">30</span>
+                        <input type="text" name="casilla_30">
+                    </div>
+                </div>
+            </td>
+            <td style="width: 34%;">
+                <div style="display:flex; align-items:center;">
+                    <span class="small" style="flex:1; text-align:right; padding-right:5px;">Total patrimonio líquido</span>
+                    <div style="width: 80px; border-left: 1px solid #000; position:relative;">
+                        <span class="cell-num">31</span>
+                        <input type="text" name="casilla_31">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 4. MATRIZ CÉDULA GENERAL -->
+    <!-- ============================================= -->
+    <table>
+        <!-- Header Matrix -->
+        <tr class="text-center small bold bg-grey">
+            <td rowspan="2" class="vertical-text border-bottom-0 bg-white" style="width: 2%;">Cédula general</td>
+            <td style="width: 26%;">Conceptos / Rentas</td>
+            <td style="width: 18%;">Rentas de trabajo</td>
+            <td style="width: 18%;">Rentas de trabajo no laborales</td>
+            <td style="width: 18%;">Rentas de capital</td>
+            <td style="width: 18%;">Rentas no laborales</td>
+        </tr>
+        
+        <!-- Row 1: Ingresos Brutos -->
+        <tr>
+            <td class="small">Ingresos brutos</td>
+            <td><div class="input-group"><span class="cell-num">32</span><input type="text" name="casilla_32"></div></td>
+            <td><div class="input-group"><span class="cell-num">43</span><input type="text" name="casilla_43"></div></td>
+            <td><div class="input-group"><span class="cell-num">58</span><input type="text" name="casilla_58"></div></td>
+            <td><div class="input-group"><span class="cell-num">74</span><input type="text" name="casilla_74"></div></td>
+        </tr>
+
+        <!-- Row 2: Devoluciones (Only Col 3, 4) -->
+        <tr class="bg-light-blue">
+            <td rowspan="12" class="vertical-text border-top-0 border-bottom-0 bg-white bold">Cédula General</td>
+            <td class="small">Devoluciones, rebajas y descuentos</td>
+            <td class="bg-grey"></td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">59</span><input type="text" name="casilla_59"></div></td>
+            <td><div class="input-group"><span class="cell-num">75</span><input type="text" name="casilla_75"></div></td>
+        </tr>
+
+        <!-- Row 3: Ingresos No Const -->
+        <tr>
+            <td class="small">Ingresos no constitutivos de renta</td>
+            <td><div class="input-group"><span class="cell-num">33</span><input type="text" name="casilla_33"></div></td>
+            <td><div class="input-group"><span class="cell-num">44</span><input type="text" name="casilla_44"></div></td>
+            <td><div class="input-group"><span class="cell-num">60</span><input type="text" name="casilla_60"></div></td>
+            <td><div class="input-group"><span class="cell-num">76</span><input type="text" name="casilla_76"></div></td>
+        </tr>
+
+        <!-- Row 4: Costos (No Col 1) -->
+        <tr class="bg-light-blue">
+            <td class="small">Costos y deducciones procedentes</td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">45</span><input type="text" name="casilla_45"></div></td>
+            <td><div class="input-group"><span class="cell-num">61</span><input type="text" name="casilla_61"></div></td>
+            <td><div class="input-group"><span class="cell-num">77</span><input type="text" name="casilla_77"></div></td>
+        </tr>
+
+        <!-- Row 5: Renta Liquida -->
+        <tr>
+            <td class="small bold">Renta líquida</td>
+            <td><div class="input-group"><span class="cell-num">34</span><input type="text" name="casilla_34"></div></td>
+            <td><div class="input-group"><span class="cell-num">46</span><input type="text" name="casilla_46"></div></td>
+            <td><div class="input-group"><span class="cell-num">62</span><input type="text" name="casilla_62"></div></td>
+            <td><div class="input-group"><span class="cell-num">78</span><input type="text" name="casilla_78"></div></td>
+        </tr>
+
+        <!-- Row 6: ECE (Only Col 3, 4) -->
+        <tr class="bg-light-blue">
+            <td class="small">Rentas líquidas pasivas - ECE</td>
+            <td class="bg-grey"></td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">63</span><input type="text" name="casilla_63"></div></td>
+            <td><div class="input-group"><span class="cell-num">79</span><input type="text" name="casilla_79"></div></td>
+        </tr>
+
+        <!-- INNER BLOCK: RENTAS EXENTAS -->
+        <!-- Row 7: Aportes -->
+        <tr>
+            <td class="small" style="position:relative;">
+                <span style="position:absolute; left:-12px; top:15px; transform:rotate(-90deg); font-size:6px; font-weight:bold;">Rentas exentas</span>
+                <span style="padding-left:10px;">Aportes voluntarios AFC, FVP y AVC</span>
+            </td>
+            <td><div class="input-group"><span class="cell-num">35</span><input type="text" name="casilla_35"></div></td>
+            <td><div class="input-group"><span class="cell-num">47</span><input type="text" name="casilla_47"></div></td>
+            <td><div class="input-group"><span class="cell-num">64</span><input type="text" name="casilla_64"></div></td>
+            <td><div class="input-group"><span class="cell-num">80</span><input type="text" name="casilla_80"></div></td>
+        </tr>
+
+        <!-- Row 8: Otras Rentas -->
+        <tr class="bg-light-blue">
+            <td class="small" style="padding-left:12px;">Otras rentas exentas</td>
+            <td><div class="input-group"><span class="cell-num">36</span><input type="text" name="casilla_36"></div></td>
+            <td><div class="input-group"><span class="cell-num">48</span><input type="text" name="casilla_48"></div></td>
+            <td><div class="input-group"><span class="cell-num">65</span><input type="text" name="casilla_65"></div></td>
+            <td><div class="input-group"><span class="cell-num">81</span><input type="text" name="casilla_81"></div></td>
+        </tr>
+
+        <!-- Row 9: Total Exentas -->
+        <tr>
+            <td class="small bold" style="padding-left:12px;">Total rentas exentas</td>
+            <td><div class="input-group"><span class="cell-num">37</span><input type="text" name="casilla_37"></div></td>
+            <td><div class="input-group"><span class="cell-num">49</span><input type="text" name="casilla_49"></div></td>
+            <td><div class="input-group"><span class="cell-num">66</span><input type="text" name="casilla_66"></div></td>
+            <td><div class="input-group"><span class="cell-num">82</span><input type="text" name="casilla_82"></div></td>
+        </tr>
+
+        <!-- INNER BLOCK: DEDUCCIONES -->
+        <!-- Row 10: Intereses -->
+        <tr class="bg-light-blue">
+            <td class="small" style="position:relative;">
+                <span style="position:absolute; left:-12px; top:15px; transform:rotate(-90deg); font-size:6px; font-weight:bold;">Deducciones imp.</span>
+                <span style="padding-left:10px;">Intereses de vivienda</span>
+            </td>
+            <td><div class="input-group"><span class="cell-num">38</span><input type="text" name="casilla_38"></div></td>
+            <td><div class="input-group"><span class="cell-num">50</span><input type="text" name="casilla_50"></div></td>
+            <td><div class="input-group"><span class="cell-num">67</span><input type="text" name="casilla_67"></div></td>
+            <td><div class="input-group"><span class="cell-num">83</span><input type="text" name="casilla_83"></div></td>
+        </tr>
+
+        <!-- Row 11: Otras Deduc -->
+        <tr>
+            <td class="small" style="padding-left:12px;">Otras deducciones imputables</td>
+            <td><div class="input-group"><span class="cell-num">39</span><input type="text" name="casilla_39"></div></td>
+            <td><div class="input-group"><span class="cell-num">51</span><input type="text" name="casilla_51"></div></td>
+            <td><div class="input-group"><span class="cell-num">68</span><input type="text" name="casilla_68"></div></td>
+            <td><div class="input-group"><span class="cell-num">84</span><input type="text" name="casilla_84"></div></td>
+        </tr>
+
+        <!-- Row 12: Total Deduc -->
+        <tr class="bg-light-blue">
+             <td class="small bold" style="padding-left:12px;">Total deducciones imputables</td>
+             <td><div class="input-group"><span class="cell-num">40</span><input type="text" name="casilla_40"></div></td>
+             <td><div class="input-group"><span class="cell-num">52</span><input type="text" name="casilla_52"></div></td>
+             <td><div class="input-group"><span class="cell-num">69</span><input type="text" name="casilla_69"></div></td>
+             <td><div class="input-group"><span class="cell-num">85</span><input type="text" name="casilla_85"></div></td>
+        </tr>
+
+        <!-- Row 13: Limitadas (Note: Col 3 is grey in this row based on logic, but let's stick to box IDs if present) -->
+        <!-- Based on image_00d8a0: Col 1(41), Col 2(53), Col 3 (No box, blank), Col 4(86) -->
+        <tr>
+            <td colspan="2" class="small">Rentas exentas y/o deduc. imputables (Limitadas)</td>
+            <td><div class="input-group"><span class="cell-num">41</span><input type="text" name="casilla_41"></div></td>
+            <td><div class="input-group"><span class="cell-num">53</span><input type="text" name="casilla_53"></div></td>
+            <td class="bg-grey"></td> <!-- Confirmed grey in analysis -->
+            <td><div class="input-group"><span class="cell-num">86</span><input type="text" name="casilla_86"></div></td>
+        </tr>
+
+        <!-- Row 14: Renta liq ord ejercicio -->
+        <tr class="bg-light-blue">
+            <td colspan="2" class="small">Renta líquida ordinaria del ejercicio</td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">54</span><input type="text" name="casilla_54"></div></td>
+            <td><div class="input-group"><span class="cell-num">70</span><input type="text" name="casilla_70"></div></td>
+            <td><div class="input-group"><span class="cell-num">87</span><input type="text" name="casilla_87"></div></td>
+        </tr>
+
+        <!-- Row 15: Perdida -->
+        <tr>
+            <td colspan="2" class="small">Pérdida líquida del ejercicio</td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">55</span><input type="text" name="casilla_55"></div></td>
+            <td><div class="input-group"><span class="cell-num">71</span><input type="text" name="casilla_71"></div></td>
+            <td><div class="input-group"><span class="cell-num">88</span><input type="text" name="casilla_88"></div></td>
+        </tr>
+
+        <!-- Row 16: Compensaciones -->
+        <tr class="bg-light-blue">
+            <td colspan="2" class="small">Compensaciones por pérdidas</td>
+            <td class="bg-grey"></td>
+            <td><div class="input-group"><span class="cell-num">56</span><input type="text" name="casilla_56"></div></td>
+            <td><div class="input-group"><span class="cell-num">72</span><input type="text" name="casilla_72"></div></td>
+            <td><div class="input-group"><span class="cell-num">89</span><input type="text" name="casilla_89"></div></td>
+        </tr>
+
+        <!-- Row 17: Renta Liq Ord Final -->
+        <tr>
+            <td colspan="2" class="small bold">Renta líquida ordinaria</td>
+            <td><div class="input-group"><span class="cell-num">42</span><input type="text" name="casilla_42"></div></td>
+            <td><div class="input-group"><span class="cell-num">57</span><input type="text" name="casilla_57"></div></td>
+            <td><div class="input-group"><span class="cell-num">73</span><input type="text" name="casilla_73"></div></td>
+            <td><div class="input-group"><span class="cell-num">90</span><input type="text" name="casilla_90"></div></td>
+        </tr>
+    </table>
+
+    <!-- SUMMARY SECTION -->
+    <table class="border-top-0">
+        <tr class="bg-light-blue">
+            <td class="small bold" style="width: 15%;">Ren. líq. céd. gen.</td>
+            <td style="width: 10%;"><div class="input-group"><span class="cell-num">91</span><input type="text" name="casilla_91"></div></td>
+            
+            <td class="small" style="width: 15%;">Ren. ex. y ded. imp. li.</td>
+            <td style="width: 10%;"><div class="input-group"><span class="cell-num">92</span><input type="text" name="casilla_92"></div></td>
+            
+            <td class="small bold" style="width: 15%;">R. líq. ord. cédula gen.</td>
+            <td style="width: 10%;"><div class="input-group"><span class="cell-num">93</span><input type="text" name="casilla_93"></div></td>
+            
+            <td class="small text-right" style="width: 15%;">Comp. pérdidas año 2018 y ant.</td>
+            <td style="width: 10%;"><div class="input-group"><span class="cell-num">94</span><input type="text" name="casilla_94"></div></td>
+        </tr>
+        <tr>
+            <td class="small">Comp. exc. ren. presuntiva</td>
+            <td><div class="input-group"><span class="cell-num">95</span><input type="text" name="casilla_95"></div></td>
+            
+            <td class="small bold">Rentas gravables</td>
+            <td><div class="input-group"><span class="cell-num">96</span><input type="text" name="casilla_96"></div></td>
+            
+            <td class="small bold">R. líq. grav. cédula gen.</td>
+            <td><div class="input-group"><span class="cell-num">97</span><input type="text" name="casilla_97"></div></td>
+            
+            <td class="small text-right">Renta presuntiva</td>
+            <td><div class="input-group"><span class="cell-num">98</span><input type="text" name="casilla_98"></div></td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 5. SPLIT SECTION: CÉDULAS (Left) vs LIQUIDACIÓN (Right) -->
+    <!-- ============================================= -->
+    <table class="border-top-0">
+        <tr>
+            <!-- LEFT COLUMN -->
+            <td style="width: 50%; padding: 0; vertical-align: top; border-right: none;" class="border-top-0">
+                <table class="border-top-0 border-right-0 border-left-0">
+                    <!-- Pensiones -->
+                    <tr>
+                        <td rowspan="5" class="vertical-text small bold bg-white">Cédula de pensiones</td>
+                        <td class="small">Ingresos brutos por rentas de pensiones del país y del exterior</td>
+                        <td style="width: 20%;"><div class="input-group"><span class="cell-num">99</span><input type="text" name="casilla_99"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">Ingresos no constitutivos de renta</td>
+                        <td><div class="input-group"><span class="cell-num">100</span><input type="text" name="casilla_100"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small bold">Renta líquida</td>
+                        <td><div class="input-group"><span class="cell-num">101</span><input type="text" name="casilla_101"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">Rentas exentas de pensiones</td>
+                        <td><div class="input-group"><span class="cell-num">102</span><input type="text" name="casilla_102"></div></td>
+                    </tr>
+                    <tr>
+                         <td class="small bold">Renta líquida gravable cédula de pensiones</td>
+                         <td><div class="input-group"><span class="cell-num">103</span><input type="text" name="casilla_103"></div></td>
+                    </tr>
+
+                    <!-- Dividendos -->
+                    <tr class="bg-light-blue">
+                        <td rowspan="7" class="vertical-text small bold bg-white">Cédula de dividendos y/o part.</td>
+                        <td class="small">Dividendos y participaciones 2016 y anteriores, y otros</td>
+                        <td><div class="input-group"><span class="cell-num">104</span><input type="text" name="casilla_104"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small">Ingresos no constitutivos de renta</td>
+                        <td><div class="input-group"><span class="cell-num">105</span><input type="text" name="casilla_105"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">Renta líquida ordinaria año 2016 y anteriores</td>
+                        <td><div class="input-group"><span class="cell-num">106</span><input type="text" name="casilla_106"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small">1a. Subcédula años 2017 y siguientes numeral 3 art. 49 del E.T.</td>
+                        <td><div class="input-group"><span class="cell-num">107</span><input type="text" name="casilla_107"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">2a. Subcédula años 2017 y siguientes parágrafo 2 art. 49 del E.T.</td>
+                        <td><div class="input-group"><span class="cell-num">108</span><input type="text" name="casilla_108"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small">Dividendos y participaciones recibidas del exterior</td>
+                        <td><div class="input-group"><span class="cell-num">109</span><input type="text" name="casilla_109"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">Rentas exentas de la casilla 109</td>
+                        <td><div class="input-group"><span class="cell-num">110</span><input type="text" name="casilla_110"></div></td>
+                    </tr>
+                    
+                    <!-- Total Gravable -->
+                    <tr>
+                        <td colspan="2" class="small bold">Renta líquida gravable (Cédula general o renta presuntiva, de pensiones y de dividendos y participaciones, art. 241 E.T.)</td>
+                        <td><div class="input-group"><span class="cell-num">111</span><input type="text" name="casilla_111"></div></td>
+                    </tr>
+
+                    <!-- Ganancias Ocasionales -->
+                    <tr class="bg-light-blue">
+                        <td rowspan="4" class="vertical-text small bold bg-white">Ganancias ocasionales</td>
+                        <td class="small">Ingresos por ganancias ocasionales del país y del exterior</td>
+                        <td><div class="input-group"><span class="cell-num">112</span><input type="text" name="casilla_112"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small">Costos por ganancias ocasionales</td>
+                        <td><div class="input-group"><span class="cell-num">113</span><input type="text" name="casilla_113"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                        <td class="small">Ganancias ocasionales no gravadas y exentas</td>
+                        <td><div class="input-group"><span class="cell-num">114</span><input type="text" name="casilla_114"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="small bold">Ganancias ocasionales gravables</td>
+                        <td><div class="input-group"><span class="cell-num">115</span><input type="text" name="casilla_115"></div></td>
+                    </tr>
+                </table>
+            </td>
+
+            <!-- RIGHT COLUMN -->
+            <td style="width: 50%; padding: 0; vertical-align: top;" class="border-top-0 border-right-0">
+                <table class="border-top-0 border-right-0 border-bottom-0">
+                    <!-- Impuesto Section -->
+                    <tr>
+                        <td rowspan="20" class="vertical-text bold bg-grey border-bottom-0">Liquidación privada</td>
+                        <td rowspan="6" class="vertical-text small border-bottom-0">Impuesto sobre las rentas líquidas gravables</td>
+                        <td class="small">Cédula general, de pensiones y de dividendos y participaciones</td>
+                        <td style="width: 20%;"><div class="input-group"><span class="cell-num">116</span><input type="text" name="casilla_116"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td class="small">Renta presuntiva, de pensiones y de dividendos y participaciones</td>
+                         <td><div class="input-group"><span class="cell-num">117</span><input type="text" name="casilla_117"></div></td>
+                    </tr>
+                    <tr>
+                         <td class="small">Por dividendos y participaciones año 2017 y siguientes, 2a subcédula</td>
+                         <td><div class="input-group"><span class="cell-num">118</span><input type="text" name="casilla_118"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td class="small">Por dividendos y participaciones año 2016</td>
+                         <td><div class="input-group"><span class="cell-num">119</span><input type="text" name="casilla_119"></div></td>
+                    </tr>
+                    <tr>
+                         <td class="small">Por dividendos y participaciones recibidas del exterior</td>
+                         <td><div class="input-group"><span class="cell-num">120</span><input type="text" name="casilla_120"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td class="small bold">Total Impuesto sobre las rentas líquidas gravables</td>
+                         <td><div class="input-group"><span class="cell-num">121</span><input type="text" name="casilla_121"></div></td>
+                    </tr>
+
+                    <!-- Descuentos Section -->
+                    <tr>
+                        <td rowspan="2" class="vertical-text small border-top-0">Descuentos tributarios</td>
+                        <td class="small" style="padding:0;">
+                             <div style="border-bottom: 1px solid #000; display:flex;">
+                                 <div style="width:50%; border-right:1px solid #000; padding:1px;">Imp. pag exterior <span class="bold">122</span> <input type="text" style="width:20px; border-bottom:1px solid #999"></div>
+                                 <div style="width:50%; padding:1px;">Donaciones <span class="bold">123</span> <input type="text" style="width:20px; border-bottom:1px solid #999"></div>
+                             </div>
+                             <div style="padding:1px;">
+                                 Otros <span class="bold">124</span> <input type="text" style="width:30px; border-bottom:1px solid #999">
+                             </div>
+                        </td>
+                        <td style="vertical-align:bottom;">
+                            <div class="small" style="margin-bottom:2px;">Total descuentos trib.</div>
+                            <div class="input-group"><span class="cell-num">125</span><input type="text" name="casilla_125"></div>
+                        </td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" style="display:none;"></td> <!-- merged above -->
+                    </tr>
+
+                    <!-- Final Calculations -->
+                    <tr>
+                         <td colspan="2" class="small bold">Impuesto neto de renta</td>
+                         <td><div class="input-group"><span class="cell-num">126</span><input type="text" name="casilla_126"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small">Impuesto de ganancias ocasionales</td>
+                         <td><div class="input-group"><span class="cell-num">127</span><input type="text" name="casilla_127"></div></td>
+                    </tr>
+                    <tr>
+                         <td colspan="2" class="small">Descuento por impuestos pagados en el exterior por ganancias ocasionales</td>
+                         <td><div class="input-group"><span class="cell-num">128</span><input type="text" name="casilla_128"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small bold">Total impuesto a cargo</td>
+                         <td><div class="input-group"><span class="cell-num">129</span><input type="text" name="casilla_129"></div></td>
+                    </tr>
+                    <tr>
+                         <td colspan="2" class="small">Anticipo renta liquidado año gravable anterior</td>
+                         <td><div class="input-group"><span class="cell-num">130</span><input type="text" name="casilla_130"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small">Saldo a favor del año gravable anterior sin solicitud de devolución y/o compensación</td>
+                         <td><div class="input-group"><span class="cell-num">131</span><input type="text" name="casilla_131"></div></td>
+                    </tr>
+                    <tr>
+                         <td colspan="2" class="small">Retenciones año gravable a declarar</td>
+                         <td><div class="input-group"><span class="cell-num">132</span><input type="text" name="casilla_132"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small">Anticipo renta para el año gravable siguiente</td>
+                         <td><div class="input-group"><span class="cell-num">133</span><input type="text" name="casilla_133"></div></td>
+                    </tr>
+
+                    <!-- Bottom Balances -->
+                    <tr>
+                         <td colspan="2" class="small bold">Saldo a pagar por impuesto</td>
+                         <td><div class="input-group"><span class="cell-num">134</span><input type="text" name="casilla_134"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small bold">Sanciones</td>
+                         <td><div class="input-group"><span class="cell-num">135</span><input type="text" name="casilla_135"></div></td>
+                    </tr>
+                    <tr>
+                         <td colspan="2" class="small bold">Total saldo a pagar</td>
+                         <td><div class="input-group"><span class="cell-num">136</span><input type="text" name="casilla_136"></div></td>
+                    </tr>
+                    <tr class="bg-light-blue">
+                         <td colspan="2" class="small bold">Total saldo a favor</td>
+                         <td><div class="input-group"><span class="cell-num">137</span><input type="text" name="casilla_137"></div></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 6. FOOTER INFO -->
+    <!-- ============================================= -->
+    <table class="border-top-0">
+        <tr>
+            <td style="width: 25%;">
+                <span class="tiny">Número de dependientes económicos</span>
+                <div class="input-group" style="width:40px; border-left:1px solid #000; display:inline-block; vertical-align:middle;">
+                    <span class="cell-num">138</span><input type="text" name="casilla_138">
+                </div>
+            </td>
+            <td style="width: 25%;">
+                <span class="tiny">Adición por dependientes a la casilla 92</span>
+                <div class="input-group" style="width:40px; border-left:1px solid #000; display:inline-block; vertical-align:middle;">
+                    <span class="cell-num">139</span><input type="text" name="casilla_139">
+                </div>
+            </td>
+            <td style="width: 25%;">
+                <span class="tiny">Ud. superó tope indicativo art. 336-1 del E.T., marque X</span>
+                <div class="input-group" style="width:40px; border-left:1px solid #000; display:inline-block; vertical-align:middle;">
+                    <span class="cell-num">140</span><input type="text" name="casilla_140">
+                </div>
+            </td>
+            <td style="width: 25%;">
+                <span class="tiny bold">Aporte voluntario</span>
+                <div class="input-group" style="width:80px; border-left:1px solid #000; display:inline-block; vertical-align:middle;">
+                    <span class="cell-num">141</span><input type="text" name="casilla_141">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- ============================================= -->
+    <!-- 7. SIGNATURES -->
+    <!-- ============================================= -->
+    <table class="border-top-0" style="height: 80px;">
+        <tr>
+            <td style="width: 50%; vertical-align: top; padding: 5px;">
+                <div style="margin-bottom: 25px;">
+                     <span class="tiny bold">981. Cód. Representación</span>
+                     <input type="text" style="width: 30px; border: 1px solid #000; display:inline-block;">
+                     <span class="tiny" style="margin-left:10px;">Firma del declarante o de quien lo representa</span>
+                </div>
+                <div style="border-bottom: 1px solid #000; width: 90%; margin-bottom:5px;"></div>
+                
+                <div style="display:flex; align-items:center;">
+                    <span class="tiny">982. Cód. Contador</span>
+                    <input type="text" style="width: 30px; border: 1px solid #000; margin: 0 5px;">
+                    <span class="tiny">Firma contador</span>
+                    <span class="tiny" style="margin-left:15px;">994. Con salvedades</span>
+                    <input type="checkbox">
+                </div>
+                <div style="border-bottom: 1px solid #000; width: 90%; margin-top:20px; margin-bottom:2px;"></div>
+                <div style="display:flex;">
+                    <span class="tiny">983. No. Tarjeta profesional</span>
+                    <input type="text" style="width: 100px; border-bottom: 1px solid #ccc; margin-left:5px;">
+                </div>
+            </td>
+            <td style="width: 50%; vertical-align: top; background-color: #f5f5f5;">
+                <div class="tiny text-center" style="color:#aaa; padding-top:10px;">997. Espacio exclusivo para el sello de la entidad recaudadora</div>
+                <div style="margin-top:40px; padding: 5px; border-top: 1px solid #000; background:white;">
+                    <span class="bold small">980. Pago total $</span>
+                    <input type="text" name="pago_total" style="width: 150px; border: 1px solid #000; height: 15px; font-weight:bold; font-size:12px;">
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="bg-blue-dian text-right tiny" style="padding: 2px; color:white;">
+        996. Espacio para el número interno de la DIAN / Adhesivo
     </div>
 
-    <!-- =============================================
-         SECCIÓN DE INFORMACIÓN BÁSICA
-         (Año, Espacio DIAN, Número de Formulario)
-         ============================================= -->
-    <table>
-        <tr>
-            <td style="width: 8%;">
-                <strong>1. Año</strong><br>
-                <span class="year-box"></span>
-                <span class="year-box"></span>
-                <span class="year-box"></span>
-                <span class="year-box"></span>
-            </td>
-            <td class="dian-space" style="width: 48%;">
-                <strong>Espacio reservado para la DIAN</strong>
-            </td>
-            <td class="form-number-space" style="width: 44%;">
-                <strong>4. Número de formulario</strong>
-            </td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         DATOS PERSONALES Y DE IDENTIFICACIÓN
-         ============================================= -->
-    <table>
-        <tr class="personal-data-row">
-            <td class="bg-gray" style="width: 2%;" rowspan="2">
-                <div class="vertical-header">Datos del<br>declarante</div>
-            </td>
-            <td style="width: 18%;"><span class="field-number">5.</span> <span class="field-label">Número de Identificación Tributaria (NIT)</span></td>
-            <td class="number-cell">6.DV</td>
-            <td style="width: 15%;"><span class="field-number">7.</span> <span class="field-label">Primer apellido</span></td>
-            <td style="width: 15%;"><span class="field-number">8.</span> <span class="field-label">Segundo apellido</span></td>
-            <td style="width: 15%;"><span class="field-number">9.</span> <span class="field-label">Primer nombre</span></td>
-            <td style="width: 15%;"><span class="field-label">10. Otros nombres</span></td>
-            <td class="bg-gray" style="width: 8%;"><span class="tiny-text">12.Cód. Dirección<br>seccional</span></td>
-        </tr>
-        <tr class="personal-data-row">
-            <td class="small-text">
-                24. Actividad<br>económica principal
-            </td>
-            <td class="small-text">
-                Si es una<br>corrección indique:
-            </td>
-            <td class="number-cell tiny-text">25. Cód.</td>
-            <td class="small-text" colspan="2">
-                26. No. Formulario<br>anterior
-            </td>
-            <td class="small-text">27. Fracción año gravable siguiente</td>
-            <td class="small-text">28. Una por ciento (1%) de compras<br>con factura electrónica</td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         SECCIÓN DE PATRIMONIO
-         (Total patrimonio bruto, Deudas, Total líquido)
-         ============================================= -->
-    <table>
-        <tr>
-            <td class="patrimonio-header" style="width: 15%;">Patrimonio</td>
-            <td class="patrimonio-header" style="width: 20%;">Total patrimonio bruto</td>
-            <td class="number-cell">29</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td class="patrimonio-header" style="width: 10%;">Deudas</td>
-            <td class="number-cell">30</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td class="patrimonio-header" style="width: 15%;">Total patrimonio<br>líquido</td>
-            <td class="number-cell">31</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         TABLA PRINCIPAL DE RENTAS
-         (Ingresos, deducciones, rentas líquidas)
-         ============================================= -->
-    <table class="watermark">
-        <tr>
-            <td class="rentas-header" style="width: 20%;">Conceptos/rentas</td>
-            <td class="rentas-header" style="width: 20%;">Rentas de trabajo</td>
-            <td class="rentas-header" style="width: 20%;">Rentas de trabajo que no provengan de una<br>relación laboral o legal y reglamentaria</td>
-            <td class="rentas-header" style="width: 20%;">Rentas de capital</td>
-            <td class="rentas-header" style="width: 20%;">Rentas no laborales</td>
-        </tr>
-
-        <!-- Ingresos brutos -->
-        <tr>
-            <td class="rentas-subheader">Ingresos brutos</td>
-            <td class="text-center number-cell">32</td>
-            <td class="input-cell"></td>
-            <td class="text-center number-cell">43</td>
-            <td class="input-cell"></td>
-            <td class="text-center number-cell">58</td>
-            <td class="input-cell"></td>
-            <td class="text-center number-cell">74</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Devoluciones, rebajas y descuentos -->
-        <tr>
-            <td>Devoluciones, rebajas y descuentos</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="number-cell">75</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Ingresos no constitutivos de renta -->
-        <tr>
-            <td>Ingresos no constitutivos de renta</td>
-            <td class="number-cell">33</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">44</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">59</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">76</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Costos y deducciones procedentes -->
-        <tr>
-            <td>Costos y deducciones procedentes</td>
-            <td></td>
-            <td></td>
-            <td class="number-cell">45</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">60</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">77</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Renta líquida -->
-        <tr class="bg-lightgray">
-            <td class="bold">Renta líquida</td>
-            <td class="number-cell">34</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">46</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">61</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">78</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Rentas líquidas pasivas - ECE -->
-        <tr>
-            <td>Rentas líquidas pasivas - ECE</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="number-cell">62</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">79</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Aportes voluntarios -->
-        <tr>
-            <td rowspan="2" class="bg-gray vertical-header" style="font-size: 5.5pt;">Cédula general<br>de rentas</td>
-            <td class="small-text">Aportes voluntarios<br>AFC, FVP y AVC</td>
-            <td class="number-cell">35</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">47</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">63</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">80</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Otras rentas exentas -->
-        <tr>
-            <td>Otras rentas exentas</td>
-            <td class="number-cell">36</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">48</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">64</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">81</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Total rentas exentas -->
-        <tr class="bg-lightgray">
-            <td class="bold">Total rentas exentas</td>
-            <td class="number-cell">37</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">49</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">65</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">82</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Intereses de vivienda -->
-        <tr>
-            <td rowspan="4" class="bg-gray vertical-header" style="font-size: 5.5pt;">Deducciones<br>imputables</td>
-            <td>Intereses de vivienda</td>
-            <td class="number-cell">38</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">50</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">66</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">83</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Otras deducciones imputables -->
-        <tr>
-            <td>Otras deducciones imputables</td>
-            <td class="number-cell">39</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">51</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">67</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">84</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Total deducciones imputables -->
-        <tr class="bg-lightgray">
-            <td class="bold">Total deducciones imputables</td>
-            <td class="number-cell">40</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">52</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">68</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">85</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Rentas exentas y/o deduc. imputables (Limitadas) -->
-        <tr>
-            <td class="bold">Rentas exentas y/o deduc.<br>imputables (Limitadas)</td>
-            <td class="number-cell">41</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">53</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">69</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">86</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Renta líquida ordinaria del ejercicio -->
-        <tr class="bg-lightgray">
-            <td class="bold">Renta líquida ordinaria<br>del ejercicio</td>
-            <td class="number-cell">54</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">70</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">87</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Pérdida líquida del ejercicio -->
-        <tr>
-            <td class="bold">Pérdida líquida del<br>ejercicio</td>
-            <td class="number-cell">55</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">71</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">88</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Compensaciones por pérdidas -->
-        <tr>
-            <td>Compensaciones por<br>pérdidas</td>
-            <td class="number-cell">56</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">72</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">89</td>
-            <td class="input-cell"></td>
-        </tr>
-
-        <!-- Renta líquida ordinaria -->
-        <tr class="bg-lightgray">
-            <td class="bold">Renta líquida ordinaria</td>
-            <td class="number-cell">42</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">57</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">73</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">90</td>
-            <td class="input-cell"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         CÉDULA GENERAL - RENTAS LÍQUIDAS
-         ============================================= -->
-    <table>
-        <tr>
-            <td class="rentas-header" style="width: 25%;">Renta líquida<br>céd. gen.</td>
-            <td class="number-cell">91</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td class="rentas-header" style="width: 25%;">Ren. ex. y<br>ded. imp. li.</td>
-            <td class="number-cell">92</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td class="rentas-header" style="width: 25%;">R. líq. ord.<br>cédula gen.</td>
-            <td class="number-cell">93</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td class="rentas-header" style="width: 15%;">Comp. pérdidas<br>año 2018 y ant.</td>
-            <td class="number-cell">94</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-        <tr>
-            <td>Comp. exc. ren.<br>presuntiva</td>
-            <td class="number-cell">95</td>
-            <td class="input-cell"></td>
-            <td>Rentas<br>gravables</td>
-            <td class="number-cell">96</td>
-            <td class="input-cell"></td>
-            <td>R. líq. grav.<br>cédula gen.</td>
-            <td class="number-cell">97</td>
-            <td class="input-cell"></td>
-            <td>Renta presuntiva</td>
-            <td class="number-cell">98</td>
-            <td class="input-cell"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         CÉDULA DE DIVIDENDOS Y PARTICIPACIONES
-         ============================================= -->
-    <table>
-        <tr>
-            <td rowspan="5" class="bg-gray vertical-header" style="width: 3%;">Cédula de dividendos y<br>participaciones</td>
-            <td style="width: 47%;">Ingresos brutos por rentas de pensiones del país y del exterior</td>
-            <td class="number-cell">99</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td rowspan="5" class="bg-gray vertical-header" style="width: 3%;">Impuesto sobre las rentas<br>líquidas gravables</td>
-            <td style="width: 32%;">Cédula general, de pensiones y de dividendos y participaciones</td>
-            <td class="number-cell">116</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-        <tr>
-            <td>Ingresos no constitutivos de renta</td>
-            <td class="number-cell">100</td>
-            <td class="input-cell"></td>
-            <td>Renta presuntiva, de pensiones y de dividendos y participaciones</td>
-            <td class="number-cell">117</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td class="bold">Renta líquida</td>
-            <td class="number-cell">101</td>
-            <td class="input-cell"></td>
-            <td>Por dividendos y participaciones año 2017 y siguientes, 2a subcédula (Art. 240 E.T.)</td>
-            <td class="number-cell">118</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td>Rentas exentas de pensiones</td>
-            <td class="number-cell">102</td>
-            <td class="input-cell"></td>
-            <td>Por dividendos y participaciones año 2016</td>
-            <td class="number-cell">119</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td class="bold">Renta líquida gravable cédula de pensiones</td>
-            <td class="number-cell">103</td>
-            <td class="input-cell"></td>
-            <td>Por dividendos y participaciones recibidas del exterior</td>
-            <td class="number-cell">120</td>
-            <td class="input-cell"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         DIVIDENDOS Y PARTICIPACIONES
-         ============================================= -->
-    <table>
-        <tr>
-            <td rowspan="6" class="bg-gray vertical-header" style="width: 3%;">Cédula de dividendos y/o<br>participaciones</td>
-            <td style="width: 47%;">Dividendos y participaciones 2016 y anteriores, y otros</td>
-            <td class="number-cell">104</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td rowspan="6" class="bg-gray vertical-header" style="width: 3%;">Liquidación privada</td>
-            <td class="bold" style="width: 32%;">Total impuesto sobre las rentas líquidas gravables</td>
-            <td class="number-cell bold">121</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-        <tr>
-            <td>Ingresos no constitutivos de renta</td>
-            <td class="number-cell">105</td>
-            <td class="input-cell"></td>
-            <td rowspan="2" class="bg-gray vertical-header" style="font-size: 5.5pt;">Imp. pagados<br>en el exterior</td>
-            <td>Donaciones</td>
-            <td class="number-cell">122</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">123</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td class="bold">Renta líquida ordinaria año 2016 y anteriores</td>
-            <td class="number-cell">106</td>
-            <td class="input-cell"></td>
-            <td>Dividendos, partcip. y otros</td>
-            <td class="number-cell">124</td>
-            <td class="input-cell"></td>
-            <td class="number-cell">125</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td class="small-text">1a. Subcédula años 2017 y siguientes numeral 3 art. 49 del E.T.</td>
-            <td class="number-cell">107</td>
-            <td class="input-cell"></td>
-            <td class="bold">Impuesto neto de renta</td>
-            <td class="number-cell bold">126</td>
-            <td class="input-cell" colspan="3"></td>
-        </tr>
-        <tr>
-            <td class="small-text">2a. Subcédula años 2017 y siguientes parágrafo 2 art. 49 del E.T.</td>
-            <td class="number-cell">108</td>
-            <td class="input-cell"></td>
-            <td class="bold">Impuesto de ganancias ocasionales</td>
-            <td class="number-cell bold">127</td>
-            <td class="input-cell" colspan="3"></td>
-        </tr>
-        <tr>
-            <td>Dividendos y participaciones recibidas del exterior</td>
-            <td class="number-cell">109</td>
-            <td class="input-cell"></td>
-            <td>Descuento por impuestos pagados en el exterior por ganancias ocasionales</td>
-            <td class="number-cell">128</td>
-            <td class="input-cell" colspan="3"></td>
-        </tr>
-        <tr>
-            <td colspan="2">Rentas exentas de la casilla 109</td>
-            <td class="number-cell">110</td>
-            <td class="input-cell"></td>
-            <td class="bold">Total impuesto a cargo</td>
-            <td class="number-cell bold">129</td>
-            <td class="input-cell" colspan="3"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         RENTA PRESUNTIVA Y GANANCIAS OCASIONALES
-         ============================================= -->
-    <table>
-        <tr>
-            <td style="width: 50%;">Renta líquida gravable (Cédula general o renta presuntiva, de pensiones y de dividendos y participaciones, art. 241 E.T.)</td>
-            <td class="number-cell">111</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td style="width: 35%;">Anticipo renta liquidado año gravable anterior</td>
-            <td class="number-cell">130</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-        <tr>
-            <td rowspan="4" class="bg-gray vertical-header" style="width: 3%;">Ganancias<br>ocasionales</td>
-            <td style="width: 47%;">Ingresos por ganancias ocasionales del país y del exterior</td>
-            <td class="number-cell">112</td>
-            <td class="input-cell"></td>
-            <td>Saldo a favor del año gravable anterior sin solicitud de devolución y/o compensación</td>
-            <td class="number-cell">131</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td>Costos por ganancias ocasionales</td>
-            <td class="number-cell">113</td>
-            <td class="input-cell"></td>
-            <td>Retenciones año gravable a declarar</td>
-            <td class="number-cell">132</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td>Ganancias ocasionales no gravadas y exentas</td>
-            <td class="number-cell">114</td>
-            <td class="input-cell"></td>
-            <td>Anticipo renta para el año gravable siguiente</td>
-            <td class="number-cell">133</td>
-            <td class="input-cell"></td>
-        </tr>
-        <tr>
-            <td class="bold">Ganancias ocasionales gravables</td>
-            <td class="number-cell bold">115</td>
-            <td class="input-cell"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         SALDO A PAGAR Y OTROS DATOS
-         ============================================= -->
-    <table>
-        <tr>
-            <td style="width: 15%;">Saldo a pagar por<br>impuesto</td>
-            <td class="number-cell">134</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td style="width: 10%;">Sanciones</td>
-            <td class="number-cell">135</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td style="width: 15%;">Total saldo a<br>pagar</td>
-            <td class="number-cell">136</td>
-            <td class="input-cell" style="width: 15%;"></td>
-            <td style="width: 15%;">Total saldo<br>a favor</td>
-            <td class="number-cell">137</td>
-            <td class="input-cell" style="width: 15%;"></td>
-        </tr>
-        <tr>
-            <td>Número de dependientes<br>económicos</td>
-            <td class="number-cell">138</td>
-            <td class="input-cell"></td>
-            <td colspan="2">Adición por dependientes a<br>la casilla 92</td>
-            <td class="number-cell">139</td>
-            <td class="input-cell"></td>
-            <td colspan="2" class="small-text">Ud. superó tope indicativo<br>art. 33-1 del E.T., marque X</td>
-            <td class="number-cell">140</td>
-            <td class="input-cell"></td>
-            <td>Aporte voluntario</td>
-            <td class="number-cell">141</td>
-            <td class="input-cell"></td>
-        </tr>
-    </table>
-
-    <!-- =============================================
-         SECCIÓN DE FIRMAS
-         ============================================= -->
-    <table class="firma-section">
-        <tr>
-            <td style="width: 3%;">981. Cód. Representación</td>
-            <td style="width: 22%;">
-                <span class="firma-box"></span>
-                Firma del declarante o de quien lo representa
-            </td>
-            <td style="width: 50%;">997. Espacio exclusivo para el sello de la entidad recaudadora</td>
-            <td rowspan="3" style="width: 25%; vertical-align: top;">
-                <div class="pago-total">980. Pago total $</div>
-            </td>
-        </tr>
-        <tr>
-            <td>982. Cód. Contador</td>
-            <td>
-                <span class="firma-box"></span>
-                Firma contador
-            </td>
-            <td rowspan="2" style="padding: 0;">
-                <div style="padding: 5px;">
-                    994. Con salvedades <span class="firma-box"></span>
-                </div>
-                <div style="padding: 5px; border-top: 1px solid #000;">
-                    996. Espacio para el número interno de la DIAN/ Adhesivo
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>983. No. Tarjeta profesional</td>
-            <td></td>
-        </tr>
-    </table>
-
 </div>
+
 </body>
 </html>
